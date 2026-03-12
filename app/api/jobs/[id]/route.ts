@@ -20,7 +20,9 @@ export async function GET(
     );
   }
 
-  return NextResponse.json(data);
+  return NextResponse.json(data, {
+    headers: { "Cache-Control": "no-store, max-age=0" },
+  });
 }
 
 // PUT /api/jobs/[id] — update job (admin only)

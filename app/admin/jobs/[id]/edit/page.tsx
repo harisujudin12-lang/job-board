@@ -14,7 +14,7 @@ export default function EditJobPage() {
   useEffect(() => {
     async function fetchJob() {
       try {
-        const res = await fetch(`/api/jobs/${params.id}`, { cache: "no-store" });
+        const res = await fetch(`/api/jobs/${params.id}?_t=${Date.now()}`, { cache: "no-store" });
         if (!res.ok) throw new Error("Lowongan tidak ditemukan");
         const data = await res.json();
         setJob(data);

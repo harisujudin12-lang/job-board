@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 
 async function getJob(id: string): Promise<Job | null> {
   const supabase = getSupabaseAdmin();

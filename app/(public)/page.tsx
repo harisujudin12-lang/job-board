@@ -17,7 +17,7 @@ export default function HomePage() {
     if (search) params.set("search", search);
     if (kategori) params.set("kategori", kategori);
 
-    const res = await fetch(`/api/jobs?${params.toString()}`, { cache: "no-store" });
+    const res = await fetch(`/api/jobs?${params.toString()}&_t=${Date.now()}`, { cache: "no-store" });
     const data: Job[] = await res.json();
     setJobs(data);
 

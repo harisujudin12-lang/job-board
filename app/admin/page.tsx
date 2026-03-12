@@ -17,7 +17,7 @@ export default function AdminDashboardPage() {
 
   async function fetchJobs() {
     setLoading(true);
-    const res = await fetch("/api/jobs", { cache: "no-store" });
+    const res = await fetch(`/api/jobs?_t=${Date.now()}`, { cache: "no-store" });
     const data = await res.json();
     setJobs(data);
     setLoading(false);
