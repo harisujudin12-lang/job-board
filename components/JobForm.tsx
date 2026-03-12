@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Job } from "@/lib/supabase";
 
@@ -23,7 +22,6 @@ type Props = {
 };
 
 export default function JobForm({ initialData, mode }: Props) {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -71,8 +69,7 @@ export default function JobForm({ initialData, mode }: Props) {
         throw new Error(data.error || "Gagal menyimpan lowongan");
       }
 
-      router.push("/admin");
-      router.refresh();
+      window.location.href = "/admin";
     } catch (err) {
       setError(err instanceof Error ? err.message : "Terjadi kesalahan");
     } finally {
