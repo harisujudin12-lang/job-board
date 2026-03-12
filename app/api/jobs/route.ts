@@ -1,18 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseAdmin, Job } from "@/lib/supabase";
 
-// GET /api/jobs — ambil semua jobs (publik: hanya aktif, admin: semua)
+// GET /api/jobs — ambil semua jobs
 export async function GET(request: NextRequest) {
   const supabase = getSupabaseAdmin();
-  const isAdmin = request.cookies.get("admin_session")?.value;
   const { searchParams } = new URL(request.url);
   const search = searchParams.get("search") || "";
   const kategori = searchParams.get("kategori") || "";
+  const showAll = searchParams.get("all") === "1";
 
   let query = supabase.from("jobs").select("*");
 
-  // Publik hanya bisa lihat yang aktif
-  if (!isAdmin) {
+  if (!showAll) {
     query = query.eq("status", "Aktif");
   }
 
@@ -35,13 +34,8 @@ export async function GET(request: NextRequest) {
   return NextResponse.json(data as Job[]);
 }
 
-// POST /api/jobs — tambah job baru (admin only)
+// POST /api/jobs — tambah job baru
 export async function POST(request: NextRequest) {
-  const session = request.cookies.get("admin_session")?.value;
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   const body = await request.json();
   const supabase = getSupabaseAdmin();
 

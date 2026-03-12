@@ -23,16 +23,11 @@ export async function GET(
   return NextResponse.json(data);
 }
 
-// PUT /api/jobs/[id] — update job (admin only)
+// PUT /api/jobs/[id] — update job
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const session = request.cookies.get("admin_session")?.value;
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   const body = await request.json();
   const supabase = getSupabaseAdmin();
 
@@ -50,16 +45,11 @@ export async function PUT(
   return NextResponse.json(data);
 }
 
-// DELETE /api/jobs/[id] — hapus job (admin only)
+// DELETE /api/jobs/[id] — hapus job
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const session = request.cookies.get("admin_session")?.value;
-  if (!session) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
   const supabase = getSupabaseAdmin();
   const { error } = await supabase.from("jobs").delete().eq("id", params.id);
 
