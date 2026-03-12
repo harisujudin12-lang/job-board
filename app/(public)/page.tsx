@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { Job } from "@/lib/supabase";
 
@@ -11,11 +11,7 @@ export default function HomePage() {
   const [allKategori, setAllKategori] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchJobs();
-  }, [search, kategori]);
-
-  async function fetchJobs() {
+  const fetchJobs = useCallback(async function fetchJobs() {
     setLoading(true);
     const params = new URLSearchParams();
     if (search) params.set("search", search);
@@ -31,7 +27,11 @@ export default function HomePage() {
       setAllKategori(cats);
     }
     setLoading(false);
-  }
+  }, [search, kategori]);
+
+  useEffect(() => {
+    fetchJobs();
+  }, [fetchJobs]);
 
   function formatDate(dateStr: string) {
     return new Date(dateStr).toLocaleDateString("id-ID", {
