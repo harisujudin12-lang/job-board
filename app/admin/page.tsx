@@ -17,7 +17,7 @@ export default function AdminDashboardPage() {
 
   async function fetchJobs() {
     setLoading(true);
-    const res = await fetch("/api/jobs?all=1");
+    const res = await fetch("/api/jobs");
     const data = await res.json();
     setJobs(data);
     setLoading(false);
@@ -57,7 +57,7 @@ export default function AdminDashboardPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              <span className="text-violet-500">Admin</span> Dashboard
+              <span className="text-violet-500">ProfDev MTI</span> Dashboard
             </h1>
             <p className="mt-1 text-gray-500 text-sm">
               Kelola semua lowongan kerja

@@ -43,7 +43,7 @@ export default function AdminLoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-extrabold text-white tracking-tight">
-            <span className="text-violet-500">Mading</span> Admin
+            <span className="text-violet-500">ProfDev MTI</span> Admin
           </h1>
           <p className="mt-2 text-gray-500 text-sm">
             Masuk untuk mengelola lowongan kerja
