@@ -2,6 +2,8 @@ import { getSupabaseAdmin, Job } from "@/lib/supabase";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 async function getJob(id: string): Promise<Job | null> {
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase
